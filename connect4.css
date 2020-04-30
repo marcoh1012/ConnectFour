@@ -26,3 +26,29 @@
 #column-top td:hover {
   background-color: gold;
 }
+
+body {
+  background-color: lawngreen;
+}
+h1 {
+  display: flex;
+  justify-content: center;
+}
+#game {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.piece {
+  border-radius: 2.5vh;
+  background-color: red;
+}
+
+.p1 {
+  background-color: red;
+}
+
+.p2 {
+  background-color: blue;
+}
