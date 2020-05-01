@@ -106,7 +106,7 @@ function placeInTable(y, x) {
             chip.style.bottom = `${topPosition}vh`;
         } else {
             clearInterval(animate);
-            nextTurn();
+            nextTurn(y, x);
         }
     }, 5);
 }
@@ -143,13 +143,13 @@ function handleClick(evt) {
 
 
 /**go to next turn after animation is complete */
-function nextTurn() {
+function nextTurn(y, x) {
     allowClick = true;
     currPlayer === "p1" ?
         (displayPlayer.innerText = "2") :
         (displayPlayer.innerText = "1");
     // check for win
-    if (checkForWin()) {
+    if (checkForWin(y, x)) {
         return endGame(`Player ${currPlayer.charAt(1)} won!`);
     }
     // check for tie
@@ -168,56 +168,106 @@ function nextTurn() {
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
-function checkForWin() {
-    function _win(cells) {
-        // Check four cells to see if they're all color of current player
-        //  - cells: list of four (y, x) cells
-        //  - returns true if all are legal coordinates & all match currPlayer
-
-        return cells.every(
-            ([y, x]) =>
-            y >= 0 &&
-            y < HEIGHT &&
-            x >= 0 &&
-            x < WIDTH &&
-            board[y][x] === currPlayer
-        );
-    }
-
-    // TODO: read and understand this code. Add comments to help you.
-
-    for (let y = 0; y < HEIGHT; y++) {
-        for (let x = 0; x < WIDTH; x++) {
-            const horiz = [
-                [y, x],
-                [y, x + 1],
-                [y, x + 2],
-                [y, x + 3],
-            ];
-            const vert = [
-                [y, x],
-                [y + 1, x],
-                [y + 2, x],
-                [y + 3, x],
-            ];
-            const diagDR = [
-                [y, x],
-                [y + 1, x + 1],
-                [y + 2, x + 2],
-                [y + 3, x + 3],
-            ];
-            const diagDL = [
-                [y, x],
-                [y + 1, x - 1],
-                [y + 2, x - 2],
-                [y + 3, x - 3],
-            ];
-
-            if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
-                return true;
+function checkForWin(y, x) {
+    const _win = {
+        upLeft: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    y--;
+                    x--;
+                    matches++;
+                }
             }
-        }
+            return matches;
+        },
+
+        left: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    x--;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+        downLeft: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    y++;
+                    x--;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+        down: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    y++;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+        downRight: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    y++;
+                    x++;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+        right: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    x++;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+        upRight: (y, x) => {
+            let matches = 0;
+            while (board[y][x] !== undefined) {
+                if (board[y][x] === currPlayer) {
+                    y--;
+                    x++;
+                    matches++;
+                }
+            }
+            return matches;
+        },
+
+
     }
+    let horizontalMatches = _win.left(y, x) + _win.right(y, x);
+    let verticalMatches = _win.down(y, x);
+    let rightDiagnolMatches = _win().downLeft(y, x) + _win().upRight(y, x);;
+    let leftDiagnolMatches = _win().upLeft(y, x) + _win().downRight(y, x);;
+
+    if (horizontalMatches < 2 || verticalMatches < 2 || rightDiagnolMatches < 2 || leftDiagnolMatches < 2) {
+        return true
+    }
+
+
+
+
+
+
+
 }
 
 makeBoard();
