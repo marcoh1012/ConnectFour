@@ -95,11 +95,10 @@ function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const chipCell = document.getElementById(`${y}-${x}`);
   const chip = document.createElement("div");
-  let topPosition = (y + 1) * 10.75;
+  let topPosition = (y + 1) * 9.75;
   chip.classList.add("piece", currPlayer);
   chip.setAttribute("style", `position:relative; bottom:${topPosition}vh`);
   chipCell.append(chip);
-  //topPosition = 64;
   const animate = setInterval(() => {
     if (topPosition > 0) {
       topPosition = topPosition - 0.5;
@@ -165,7 +164,7 @@ function nextTurn(y, x) {
   htmlBoard.classList.toggle("player2Turn");
 }
 
-/** checkForWin: check board cell-by-cell for "does a win start here?" */
+/** checkForWin: check aroung the placed chip for 3 more chips of same player*/
 
 function checkForWin(y, x) {
   const _win = {
@@ -249,6 +248,7 @@ function checkForWin(y, x) {
     },
   };
 
+  /**testMatch checks if coordinates are on the board and if chip is assigned to currentPlayer */
   const testMatch = (y, x) => {
     if (
       y > 0 &&
@@ -275,7 +275,6 @@ function checkForWin(y, x) {
   ) {
     return true;
   }
-  return false;
 }
 
 makeBoard();

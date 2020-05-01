@@ -2,7 +2,7 @@
 
 #board td {
   width: 8rem;
-  height: 10vh;
+  height: 7rem;
   border: solid 3px rgba(0, 0, 0, 0.164);
   background-color: rgba(255, 253, 253, 0.164);
   border-radius: 100%;
@@ -48,7 +48,7 @@ body {
 h1 {
   display: flex;
   justify-content: center;
-  font-size: 5rem;
+  font-size: 5em;
 }
 #game {
   display: flex;
@@ -81,7 +81,7 @@ h1 {
   text-align: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 1rem;
 }
 
@@ -90,6 +90,6 @@ h1 {
   align-content: center;
   justify-content: center;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 0.3rem;
 }
