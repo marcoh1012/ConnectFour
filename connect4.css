@@ -1,38 +1,54 @@
 /* game board table */
 
 #board td {
-  width: 50px;
-  height: 50px;
-  border: solid 1px #666;
+  width: 8rem;
+  height: 10vh;
+  border: solid 3px rgba(0, 0, 0, 0.164);
+  background-color: rgba(255, 253, 253, 0.164);
+  border-radius: 100%;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
   /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
+  position: absolute;
+  margin: auto;
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
 }
 
+.pieceContainer {
+  position: relative;
+}
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+  border: dashed 1px black;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 200%;
+  font-weight: 200;
 }
 
-#column-top td:hover {
-  background-color: gold;
+#column-top.player1Turn td:hover {
+  height: 80%;
+  background-color: red;
+}
+#column-top.player2Turn td:hover {
+  background-color: rgb(2, 2, 119);
 }
 
 body {
-  background-color: lawngreen;
+  background-color: rgb(163, 224, 221);
 }
 h1 {
   display: flex;
   justify-content: center;
+  font-size: 5rem;
 }
 #game {
   display: flex;
@@ -40,15 +56,40 @@ h1 {
   align-content: center;
 }
 
-.piece {
-  border-radius: 2.5vh;
-  background-color: red;
-}
-
 .p1 {
   background-color: red;
 }
 
 .p2 {
+  background-color: rgb(2, 2, 119);
+}
+#gameBoard {
+  border: solid 5px rgb(128, 126, 126);
   background-color: blue;
+  width: fit-content;
+  border-radius: 1rem;
+  padding: 15px;
+}
+#newGame {
+  display: flexbox;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#newGameButton {
+  text-align: center;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+
+#displayPlayer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 0.3rem;
 }
