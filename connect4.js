@@ -95,7 +95,7 @@ function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const chipCell = document.getElementById(`${y}-${x}`);
   const chip = document.createElement("div");
-  let topPosition = (y + 1) * 9.75;
+  let topPosition = (y + 1) * 8.75;
   chip.classList.add("piece", currPlayer);
   chip.setAttribute("style", `position:relative; bottom:${topPosition}vh`);
   chipCell.append(chip);

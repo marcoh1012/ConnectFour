@@ -1,8 +1,9 @@
 /* game board table */
 
 #board td {
-  width: 8rem;
-  height: 9vh;
+  width: 6vw;
+  max-width: 75px;
+  height: 8vh;
   border: solid 3px rgba(0, 0, 0, 0.164);
   background-color: rgba(255, 253, 253, 0.164);
   border-radius: 100%;
@@ -30,7 +31,7 @@
   border: dashed 1px black;
   border-radius: 100%;
   text-align: center;
-  font-size: 200%;
+  font-size: 90%;
   font-weight: 200;
 }
 
@@ -48,7 +49,7 @@ body {
 h1 {
   display: flex;
   justify-content: center;
-  font-size: 4.3rem;
+  font-size: 3rem;
 }
 #game {
   display: flex;
@@ -79,10 +80,10 @@ h1 {
 
 #newGameButton {
   text-align: center;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  font-size: 1.5rem;
-  border-radius: 1rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
 }
 
 #displayPlayer {
@@ -90,6 +91,6 @@ h1 {
   align-content: center;
   justify-content: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.3rem;
 }
