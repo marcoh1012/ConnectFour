@@ -1,5 +1,7 @@
 /* game board table */
-
+tr {
+  width: 4.5rem;
+}
 #board td {
   width: 4rem;
   height: 4rem;

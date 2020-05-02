@@ -14,7 +14,6 @@ let allowClick = true;
 const newGameButton = document.querySelector("#newGameButton");
 newGameButton.addEventListener("click", newGame);
 const displayPlayer = document.querySelector("#currentPlayer");
-displayPlayer.innerText = "1";
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -34,6 +33,7 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
+  displayPlayer.innerText = "1";
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector("#board");
   // TODO: add comment for this code
@@ -285,6 +285,8 @@ function newGame(evt) {
   evt.preventDefault();
   const htmlBoard = document.querySelector("#board");
   htmlBoard.innerHTML = "";
+  htmlBoard.classList.remove("player2Turn");
+  currPlayer = "p1";
   allowClick = true;
   makeBoard();
   makeHtmlBoard();
