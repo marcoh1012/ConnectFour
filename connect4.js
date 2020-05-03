@@ -152,8 +152,8 @@ function nextTurn(y, x) {
   }
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  if (board.every((cell) => cell === "")) {
-    ndGame(`Tie Game! Start New Game`);
+  if (board.every((cell) => cell !== "")) {
+    endGame(`Tie Game! Start New Game`);
     console.log("tie");
   }
   // switch players
