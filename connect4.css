@@ -1,97 +1,121 @@
 /* game board table */
+
 tr {
-  width: 4.5rem;
+    width: 4.5rem;
 }
+
 #board td {
-  width: 4rem;
-  height: 4rem;
-  border: solid 3px rgba(0, 0, 0, 0.164);
-  background-color: rgba(255, 253, 253, 0.164);
-  border-radius: 100%;
+    width: 4rem;
+    height: 4rem;
+    min-width: 40px;
+    border: solid 3px rgba(0, 0, 0, 0.164);
+    background-color: rgba(255, 253, 253, 0.164);
+    border-radius: 100%;
 }
+
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
-  /* TODO: make into circles */
-  position: absolute;
-  margin: auto;
-  width: 90%;
-  height: 90%;
-  border-radius: 100%;
+    /* TODO: make into circles */
+    position: absolute;
+    bottom: 0%;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    border-radius: 100%;
+    animation: dropChip 1s forwards;
 }
 
 .pieceContainer {
-  position: relative;
+    position: relative;
 }
+
+
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
+
 
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px black;
-  border-radius: 100%;
-  text-align: center;
-  font-size: 90%;
-  font-weight: 200;
+    border: dashed 1px black;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 90%;
+    font-weight: 200;
 }
 
 #column-top.player1Turn td:hover {
-  height: 80%;
-  background-color: red;
+    height: 80%;
+    background-color: red;
 }
+
 #column-top.player2Turn td:hover {
-  background-color: rgb(2, 2, 119);
+    background-color: rgb(2, 2, 119);
 }
 
 body {
-  background-color: rgb(163, 224, 221);
+    background-color: rgb(163, 224, 221);
 }
+
 h1 {
-  display: flex;
-  justify-content: center;
-  font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
 }
+
 #game {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .p1 {
-  background-color: red;
+    background-color: red;
 }
 
 .p2 {
-  background-color: rgb(2, 2, 119);
+    background-color: rgb(2, 2, 119);
 }
+
 #gameBoard {
-  border: solid 5px rgb(128, 126, 126);
-  background-color: blue;
-  width: fit-content;
-  border-radius: 1rem;
-  padding: 15px;
+    border: solid 5px rgb(128, 126, 126);
+    background-color: blue;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: 15px;
 }
+
 #newGame {
-  display: flexbox;
-  align-content: center;
-  justify-content: center;
-  text-align: center;
+    display: flexbox;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #newGameButton {
-  text-align: center;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
 }
 
 #displayPlayer {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 0.3rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+@-webkit-keyframes dropChip {
+    0% {}
+    100% {
+        transform: translateY(0px);
+    }
 }
