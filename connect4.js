@@ -8,8 +8,8 @@
 const WIDTH = 7;
 const HEIGHT = 6;
 
-let currPlayer = "1"; // active player: 1 or 2
-let board // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = "1";
+let board;
 let allowClick = true;
 const newGameButton = document.querySelector("#newGameButton");
 newGameButton.addEventListener("click", newGame);
@@ -28,18 +28,22 @@ function makeBoard() {
     }
 }
 
+function createRow(y,row){
+    for (let x = 0; x < WIDTH; x++) {
+        const cell = document.createElement("td");
+        cell.setAttribute("id", `${y}-${x}`);
+        cell.setAttribute("class", "pieceContainer");
+        row.append(cell);
+    }
+}
+
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
     displayPlayer.innerText = "1";
-    // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-    const htmlBoard = document.querySelector("#board");
-    // TODO: add comment for this code
 
-    //creates the top 7 blocks with click listeners
-    //creates an element for each box with a listener
-    //appends the elements from left to right with the idx stored as the id
-    //appends the top column to the dom
+    const htmlBoard = document.querySelector("#board");
+
     const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
     top.setAttribute("class", "player1Turn");
@@ -49,27 +53,16 @@ function makeHtmlBoard() {
         const headCell = document.createElement("td");
         headCell.setAttribute("id", x);
         headCell.setAttribute("class", "placeHere");
-        headCell.innerHTML = "&#8659;";
+        headCell.innerText = "\u21E3";
+        headCell.style.fontSize="60px"
         top.append(headCell);
     }
     htmlBoard.append(top);
 
-    // TODO: add comment for this code
 
-    //creates the board that will display the game pieces.
-    //creates a row element
-    //creates each cell based on the width
-    //appends each cell with id x an y that shows where the cell is ocated on the board. to the row
-    //appends the row to the board game
-    //loops the same as the height to fill up the board
     for (let y = 0; y < HEIGHT; y++) {
         const row = document.createElement("tr");
-        for (let x = 0; x < WIDTH; x++) {
-            const cell = document.createElement("td");
-            cell.setAttribute("id", `${y}-${x}`);
-            cell.setAttribute("class", "pieceContainer");
-            row.append(cell);
-        }
+        createRow(y,row);
         htmlBoard.append(row);
     }
 }
@@ -77,7 +70,6 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-    // TODO: write the real version of this, rather than always returning 0
     for (let y = HEIGHT - 1; y >= 0; y--) {
         if (!board[y][x]) {
             return y;
@@ -86,30 +78,32 @@ function findSpotForCol(x) {
     return null;
 }
 
-/** placeInTable: update DOM to place piece into HTML table of board */
-
-function placeInTable(y, x, callback) {
-    // TODO: make a div and insert into correct table cell
-    const chipCell = document.getElementById(`${y}-${x}`);
+/**Create chip that will pe placed in table */
+function createChip(y,callback){
     const chip = document.createElement("div");
 
     let topPosition = (y * 72) + 84;
     chip.setAttribute("style", `transform: translateY(-${topPosition}px)`);
     chip.classList.add("piece", `p${currPlayer}`);
-    chipCell.append(chip);
-
-
     chip.addEventListener('animationend', () => {
         callback();
     });
+    return chip
+}
+
+/** placeInTable: update DOM to place piece into HTML table of board */
+
+function placeInTable(y, x, callback) {
+    const chipCell = document.getElementById(`${y}-${x}`);
+    chipCell.append(createChip(y,callback));    
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
     allowClick = false;
-    alert(msg);
-    // TODO: pop up alert message
+    //alert(msg);
+    Swal.fire(msg)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -118,10 +112,8 @@ function handleClick(evt) {
     if (!allowClick) {
         return;
     }
-    // get x from ID of clicked cell
     let x = +evt.target.id;
     allowClick = false;
-    // get next spot in column (if none, ignore click)
     let y = findSpotForCol(x);
     if (y === null) {
         allowClick = true;
@@ -154,7 +146,6 @@ function handleClick(evt) {
     }
 
     // place piece in board and add to HTML table
-    // TODO: add line to update in-memory board
     board[y][x] = currPlayer;
     placeInTable(y, x, callback);
 
@@ -247,9 +238,9 @@ function checkForWin(y, x) {
     /**testMatch checks if coordinates are on the board and if chip is assigned to currentPlayer */
     const testMatch = (y, x) => {
         if (
-            y > 0 &&
+            y >= 0 &&
             y < HEIGHT &&
-            x > 0 &&
+            x >= 0 &&
             x < WIDTH &&
             board[y][x] === currPlayer
         ) {
